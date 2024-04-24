@@ -5,6 +5,7 @@ from django.db import transaction
 from strawberry import Info
 
 from core.models import Product
+from core.schema.enums import QualityEnum
 from exercise4.schema.types import (ProductType)
 
 
@@ -14,8 +15,8 @@ class ProductInput:
     pk: Optional[strawberry.ID] = None
     name: str
     social_club_id: strawberry.ID
-    # TODO 3: price
-    # TODO 4: quality
+    price: int 
+    quality: QualityEnum
 
 # QUESTION: Lookup the UNSET type on the strawberry docs. What could it be useful for? What is the difference between None and UNSET?
 

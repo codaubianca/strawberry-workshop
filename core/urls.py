@@ -1,7 +1,7 @@
 from django.conf import settings
 from django.views.generic import RedirectView
 
-from final.schema.schema import schema
+from exercise4.schema.schema import schema
 from django.urls import path
 from strawberry.django.views import GraphQLView
 

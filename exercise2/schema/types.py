@@ -1,5 +1,5 @@
 import strawberry
-
+from typing import List
 from core.schema.enums import QualityEnum
 
 
@@ -11,10 +11,9 @@ class SocialClubType:
     name: str
     street: str
     zip: str
-    # TODO 1: members - care for a forward declaration [List of MemberType's]
-    # TODO 2: guests - care for a forward declaration [List of GuestType's]
-    # TODO 3: products - care for a forward declaration [List of ProductType's]
-
+    members: List["MemberType"]
+    guests: List["GuestType"]
+    products: List["ProductType"]
 
 @strawberry.type
 class ProductType:
@@ -22,9 +21,9 @@ class ProductType:
     name: str
     price: int
     quality: QualityEnum
-    # TODO 4: social_club (SocialClubType)
     # QUESTION: uh oh - this could go evilly wrong in future...
     # HINT: Maybe we should use one or more schema extensions? https://strawberry.rocks/docs/extensions
+    social_club: SocialClubType
 
 
 @strawberry.type
@@ -33,7 +32,7 @@ class MemberType:
     first_name: str
     last_name: str
     age: int
-    # TODO 5: social_club (SocialClubType)
+    social_club: SocialClubType
 
 
 @strawberry.type
@@ -42,4 +41,4 @@ class GuestType:
     first_name: str
     last_name: str
     rating: int
-    # TODO 6: social_club (SocialClubType)
+    social_club: SocialClubType

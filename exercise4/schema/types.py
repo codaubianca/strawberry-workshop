@@ -1,4 +1,4 @@
-from typing import List, TYPE_CHECKING
+from typing import List, TYPE_CHECKING, Optional
 
 import strawberry
 from strawberry import Info
@@ -32,11 +32,9 @@ class SocialClubType:
     def zip(self, info: Info) -> str:
         return self.instance.zip
 
-    # TODO 2: Add arguments to the field
     # DOCS: https://strawberry.rocks/docs/general/queries#arguments
     @strawberry.field
-    def members(self, info: Info) -> List["MemberType"]:
-        starts_with = None # TODO 2.1: remove this line
+    def members(self, info: Info, starts_with: Optional[str] = None) -> List["MemberType"]:
         qs = self.instance.member_set.all()
         if starts_with is not None:
             # QUESTION/DJANGO: Filtering will destroy our prefetch - is there a performance workaround? Is there a tradeoff?

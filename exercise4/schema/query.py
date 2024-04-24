@@ -1,5 +1,5 @@
 from datetime import datetime
-from typing import List
+from typing import List, Optional
 
 import strawberry
 from django.db.models import Count
@@ -13,11 +13,9 @@ from exercise4.schema.types import (SocialClubType, ProductType)
 @strawberry.type
 class Query:
 
-    # TODO 1: Add arguments to the field
     # DOCS: https://strawberry.rocks/docs/general/queries#arguments
     @strawberry.field
-    def social_clubs(self, info: Info) -> List[SocialClubType]:
-        min_member_count = None  # TODO 1.1: Remove this line
+    def social_clubs(self, info: Info, min_member_count: Optional[int] = None) -> List[SocialClubType]:
         qs = SocialClub.objects.all()
         if min_member_count is not None:
             # QUESTION/DJANGO: Filtering will destroy our prefetch - is there a performance workaround? Is there a tradeoff?
